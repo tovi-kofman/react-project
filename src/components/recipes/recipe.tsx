@@ -3,8 +3,8 @@ import { Link} from 'react-router-dom';
 import { Card, CardContent, Typography } from '@mui/material';
 const Recipe = ({ id, title, description }: { id?: number; title: string; description: string }) => {
 return (
-<Card sx={{ borderRadius: 2, boxShadow: 2 }}>
-            <CardContent>
+<Card sx={{ borderRadius: 2, boxShadow: 2 ,width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <CardContent sx={{ textAlign: 'center' }}>
             
                 <Link to={`/Recipes/${id}`} style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary">

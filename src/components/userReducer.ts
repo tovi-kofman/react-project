@@ -11,7 +11,7 @@ export type User={
 }
 export type Action={
     type:'UPDATE_USER',
-    data:User
+    data:Partial<User>
 }|{
     type:'DELETE',
 }|{

@@ -74,7 +74,7 @@ const recipesSlice = createSlice({
                 id: action.payload.id,
                 title: action.payload.title || "new recipe",
                 description: action.payload.description || "",
-                authorId: action.payload.authorId || 0,
+                authorId: action.payload.authorId,
                 ingredients: action.payload.ingredients || [],
                 instructions: action.payload.instructions || "",
             });

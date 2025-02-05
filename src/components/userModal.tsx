@@ -20,7 +20,7 @@ const UserModal = forwardRef(({ open, onClose, onSubmit, initialData = { firstNa
         password: null,
         address: null,
         phone: null,
-        id: null
+        id:null
     });
 
     useImperativeHandle(ref, () => ({
@@ -41,8 +41,7 @@ const UserModal = forwardRef(({ open, onClose, onSubmit, initialData = { firstNa
             email: inputRefs.current.email?.value || '',
             password: inputRefs.current.password?.value || '',
             address: inputRefs.current.address?.value || '',
-            phone: inputRefs.current.phone?.value || '',
-            id: inputRefs.current.id?.value || 0
+            phone: inputRefs.current.phone?.value || ''
         });
         onClose();
     };
@@ -58,9 +57,9 @@ const UserModal = forwardRef(({ open, onClose, onSubmit, initialData = { firstNa
                     position: 'absolute', 
                     top: '50%', 
                     left: '50%', 
-                    transform: 'translate(-50%, -50%)', // מרכז את המודל
-                    width: '400px', // רוחב המודל
-                    maxWidth: '90%', // רוחב מקסימלי
+                    transform: 'translate(-50%, -50%)', 
+                    width: '400px', 
+                    maxWidth: '90%', 
                 }}
             >
                 <h2>{title}</h2>

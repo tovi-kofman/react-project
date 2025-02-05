@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import ShowUser from "./showUser";
 import { User, UserContext } from "./userReducer";
-import { Button } from "@mui/material";
 import UserModal from "./userModal";
 import axios from "axios";
 import { StyledButton } from "./style";
@@ -18,8 +17,8 @@ const Login = () => {
           email: data.email,
           password: data.password,
         });
-        userDispatch({ type: 'ADD_USER',data: { email: data.email||'@@@', password:data.password||'%%%', id: Number(response.data.userId)||0 }});
-       ///////
+        userDispatch({ type: 'ADD_USER', data: { email: data.email || '@@@', password: data.password || '%%%', id: response.data.userId } });
+        ///////
         console.log(response.data)
 
       } else if (type === 'login') {
@@ -27,29 +26,35 @@ const Login = () => {
           email: data.email,
           password: data.password,
         });
-        userDispatch({ type: 'UPDATE_USER', data: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          password: data.password,
-          address:data.address,
-          phone:data.phone,
-        }, });
+        userDispatch({
+          type: 'UPDATE_USER', data: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password,
+            address: data.address,
+            phone: data.phone,
+          },
+        });
         //////////////
         console.log(response.data)
       } else if (type === 'update') {
-        response = await axios.put('http://localhost:3000/api/user', {data:{
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          password: data.password,
-          address:data.address,
-          phone:data.phone,
-          // id:user.id
-        }}, { headers: { 'user-id': '' + user.id } });
+        console.log(user)
+        response = await axios.put('http://localhost:3000/api/user', {
+          data: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password,
+            address: data.address,
+            phone: data.phone,
+            //id:user.id
+          }
+        }, { headers: { 'user-id': ''+user.id } });
         userDispatch({
-          type: 'UPDATE_USER', data: {firstName:data.firstName,lastName:data.lastName,email: data.email,password: data.password,address: data.address,phone:data.phone,
-          },    
+          type: 'UPDATE_USER', data: {
+            firstName: data.firstName, lastName: data.lastName, email: data.email, password: data.password, address: data.address, phone: data.phone,
+          },
         });
         console.log(response.data.user)
       }
@@ -62,14 +67,14 @@ const Login = () => {
         } else {
           alert('An error occurred during registration.');
         }
-      }else if (type === 'login') {
+      } else if (type === 'login') {
         if (error.response && error.response.data.message) {
           alert(`Login Error: ${error.response.data.message}`);
         } else {
           alert('An error occurred during login.');
         }
-      } 
-       else if (type === 'update') {
+      }
+      else if (type === 'update') {
         if (error.response && error.response.data.message) {
           alert(`Update Error: ${error.response.data.message}`);
         } else {
@@ -80,32 +85,32 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(user); 
+    console.log(user);
   }, [user]);
   return (
     <>
       <UserContext.Provider value={{ user, userDispatch }}>
-      <StyledButton onClick={() => { setModalType('login'); setOpenUserModal(true); }} variant="contained" color="primary">Login</StyledButton>
-      <StyledButton onClick={() => { setModalType('register'); setOpenUserModal(true); }} variant="contained" color="primary">Register</StyledButton>
-      <UserModal
-        open={openUserModal}
-        onClose={() => setOpenUserModal(false)}
-        onSubmit={(data: User) => handleUserSubmit(data, modalType)} // Corrected here
-        title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
-        type={modalType}
-        initialData={user}
-      />
+        <StyledButton onClick={() => { setModalType('login'); setOpenUserModal(true); }} variant="contained" color="primary">Login</StyledButton>
+        <StyledButton onClick={() => { setModalType('register'); setOpenUserModal(true); }} variant="contained" color="primary">Register</StyledButton>
+        <UserModal
+          open={openUserModal}
+          onClose={() => setOpenUserModal(false)}
+          onSubmit={(data: User) => handleUserSubmit(data, modalType)} // Corrected here
+          title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
+          type={modalType}
+          initialData={user}
+        />
         {showUserComponent && <ShowUser />}
         {showUserComponent && (
           <StyledButton onClick={() => { setModalType('update'); setOpenUserModal(true); }} variant="contained" color="primary">Update User</StyledButton>
         )}
-      <style>
-        {`
+        <style>
+          {`
           body {
             overflow: hidden;
           }
         `}
-      </style>
+        </style>
       </UserContext.Provider>
 
     </>

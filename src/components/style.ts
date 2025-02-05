@@ -3,13 +3,14 @@ import { Button, createTheme, styled } from "@mui/material";
  export const StyledButton = styled(Button)(({ theme}) => ({
     marginTop: theme.spacing(2),
     margin:'5px',
-    top:75,
-  backgroundColor:theme.palette.primary.main,
-  color: theme.palette.common.white, 
+    left :'53px',
+   zIndex:10000,
+  backgroundColor:theme.palette.common.white,
+  color: theme.palette.primary.main, 
   '&:hover': {
     backgroundColor:theme.palette.primary.dark,
-  },
-  zIndex: 100,
+    color: theme.palette.common.white
+  }
   }));
  export const theme = createTheme({
     palette: {

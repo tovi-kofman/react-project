@@ -17,14 +17,14 @@ const ListRecipes = () => {
     }, [dispatch, recipesList.length])
     return (
         <>
-            <Paper
+            <Paper 
                 elevation={3}
                 sx={{
-                    position: "fixed",
+                    position: "absolute",
                     right: "20px",
-                    top: "100px",
-                    width: "300px",
-                    maxHeight: "80vh",
+                    top: "80px",
+                    width: "39%",
+                    maxHeight: "83vh",
                     overflowY: "auto",
                     padding: "16px",
                     borderRadius: "8px",
@@ -35,9 +35,9 @@ const ListRecipes = () => {
                     רשימת מתכונים
                 </Typography>
 
-                <List>
+                <List >
                     {recipesList.map((recipe, index) => (
-                        <ListItem key={`${recipe.id}-${index}`} divider>
+                        <ListItem key={`${recipe.id}-${index}`} divider >
                             <Recipe id={recipe.id} title={recipe.title} description={recipe.description} />
                         </ListItem>
                     ))}
